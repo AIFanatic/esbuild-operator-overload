@@ -14,8 +14,10 @@ Does not support `+=` or equivalents.
 This library consists of an esbuild plugin that uses https://github.com/kach/nearley to parse typescript files and replace operators with their corresponding functions.
 <br>
 In order to make the linter not complain a few hacks are implemented:
-* To trick typescript into thinking that classes are numbers a `ClassOverload.ts` file should be created that creates a new `ClassInstance` and returns it with the type number (see: ./src/PointOverload.ts). The caveat is that instead of using the overloaded class like `const oc = new OverloadedClass();` it needs to be instanciated with `const oc = OverloadedClass();`
+* To trick typescript into thinking that classes are numbers a `ClassOverload.ts` file should be created that creates a new `ClassInstance` and returns it with the type number (see: ./src/PointOverload.ts). The caveat is that instead of using the overloaded class like `const oc = new OverloadedClass();` it needs to be instanciated with `const oc = OverloadedClass();`. Further note that the `ClassOverload.ts` file is a separate file so that both the class and the "factory" can have the same name, eg: `class Point` <- `function Point(args): number` (in `PointOverload.ts` the class `Point` is imported with `import { Point as __Point } from "./Point";` to avoid clashes)
+
 * In order to make a `Number` and `Class` compatible a `global-types.d.ts` file should be created (look at `./src/global-types.d.ts`) to extend `Number` with the overloaded class. This allows for things like `p1 + 10` to work.
+
 * When the code is transpiled by esbuild a few prototypes are "injected" into the Number class in order for some methods to work (eg: radd, rmul, etc), this allows for things like `10 + p1` to work (internally it calls `p1.radd(10)`).
 
 ## How to use it

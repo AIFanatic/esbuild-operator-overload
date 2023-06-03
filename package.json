@@ -1,0 +1,21 @@
+{
+  "name": "ts-operator-overload",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build-plugin": "node build.plugin.js",
+    "build-plugin-test": "node build.plugin.test.js",
+    "build-all": "npm run build-plugin && npm run build-plugin-test",
+    "build-rules": "node ./node_modules/.bin/nearleyc ./src/plugin/PointGrammar.ne -o ./dist/PointGrammar.js",
+    "execute": "node ./dist/ts-operator-overload-test.js",
+    "execute-test": "node ./dist/ts-operator-overload-test.js",
+    "start": "npm run build-all && npm run execute"
+  },
+  "devDependencies": {
+    "esbuild": "^0.17.19",
+    "nearley": "^2.20.1",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {}
+}

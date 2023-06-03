@@ -2,7 +2,7 @@ import { Plugin } from 'esbuild';
 import * as fs from 'fs';
 
 import * as nearley from 'nearley';
-import * as grammar from '../../dist/PointGrammar';
+import * as grammar from './PointGrammar';
 
 const injected = `
 Number.prototype.add = function(other) { 

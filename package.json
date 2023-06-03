@@ -7,7 +7,7 @@
     "build-plugin": "node build.plugin.js",
     "build-plugin-test": "node build.plugin.test.js",
     "build-all": "npm run build-plugin && npm run build-plugin-test",
-    "build-rules": "node ./node_modules/.bin/nearleyc ./src/plugin/PointGrammar.ne -o ./dist/PointGrammar.js",
+    "build-rules": "node ./node_modules/.bin/nearleyc ./src/plugin/PointGrammar.ne -o ./src/plugin/PointGrammar.js",
     "execute": "node ./dist/ts-operator-overload-test.js",
     "execute-test": "node ./dist/ts-operator-overload-test.js",
     "start": "npm run build-all && npm run execute"

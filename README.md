@@ -14,10 +14,9 @@ Does not support `+=` or equivalents.
 This library consists of an esbuild plugin that uses https://github.com/kach/nearley to parse typescript files and replace operators with their corresponding functions.
 <br>
 In order to make the linter not complain a few hacks are implemented:
-* The class that wants to have its operators overloaded is considered a `Number` class, in order to do this a `global-types.d.ts` file should be created (look at `./src/global-types.d.ts`), this allows the linter to not complain when `class + class` is used.
 * When the code is transpiled by esbuild a few prototypes are "injected" into the Number class in order for some methods to work (eg: radd, rmul, etc), this allows for things like `10 + p1` to work (internally it calls `p1.radd(10)`).
-
-The library is implemented as an 
+* The class that wants to have its operators overloaded is considered a `Number` class, in order to do this a `global-types.d.ts` file should be created (look at `./src/global-types.d.ts`), this allows the linter to not complain when `class + class` is used.
+* To trick typescript into thinking that classes are numbers a `ClassOverload.ts` file should also be created that creates a new `ClassInstance` and returns it with the type number (see: ./src/PointOverload.ts). This makes using the overloaded class like `const oc = OverloadedClass();` instead of `const oc = new OverloadedClass();`
 
 ## How to use it
 Kinda TODO, but the code is structured as the both the plugin (./src/plugin/) and the example on how to use it (./src/).
